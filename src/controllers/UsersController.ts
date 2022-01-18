@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import UserSchema from '../Models/User';
 
-class UserController {
+class UsersController {
     public async login(req: Request, res: Response): Promise<Response> {
         const { email, password } = req.body;
 
@@ -44,4 +44,4 @@ class UserController {
     }
 }
 
-export default new UserController();
+export default new UsersController();
