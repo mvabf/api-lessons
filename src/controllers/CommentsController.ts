@@ -19,6 +19,29 @@ class CommentsController {
         
         return res.status(201).json(newComment);
     }
+
+    public async list(req: Request, res: Response): Promise<Response> {
+        const comments = await CommentSchema.find().limit(50).sort('-date_created');
+
+        return res.json(comments);
+    }
+
+    public async delete(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+
+        try {
+            const comment = await CommentSchema.findById(id);
+
+            await ClassSchema.findOneAndUpdate({ _id: comment.id_class }, { $inc: { total_comments: -1 } });
+
+            await CommentSchema.findByIdAndDelete(id);
+
+            return res.status(204).json({});
+
+        } catch (err) {
+            return res.status(404).json({ error: 'id not found!' });
+        }
+    }
 }
 
 export default new CommentsController();
