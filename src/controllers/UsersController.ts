@@ -20,7 +20,7 @@ class UsersController {
 
         const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1d' });
 
-        return res.json(token);
+        return res.json({token_tindin: token});
     }
 
     public async index(req: Request, res: Response): Promise<Response> {
