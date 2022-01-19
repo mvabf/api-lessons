@@ -13,7 +13,7 @@ class UsersController {
         if (!user)
             return res.status(401).json({ message: 'user does not exists!' });
 
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        const isValidPassword = password == user.password ? true : false;
 
         if (!isValidPassword)
             return res.status(401).json({ message: 'wrong password!' });
@@ -35,7 +35,7 @@ class UsersController {
         const user = {
             name,
             email,
-            password: bcrypt.hashSync(password, 8)
+            password
         };
 
         await UserSchema.create(user);
