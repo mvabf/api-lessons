@@ -26,6 +26,7 @@ docker-compose up -d
 * Make sure all these ports are available before running the above command.
 
 ## Running without Docker
+Antes de rodar, definir suas credenciais do mongodb no arquivo database/db.ts
 
 ```
 yarn
